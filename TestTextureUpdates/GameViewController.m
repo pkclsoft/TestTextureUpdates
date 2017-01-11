@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "GameScene.h"
 
 @implementation GameViewController
 
@@ -50,6 +51,8 @@
     
     // set the scene to the view
     scnView.scene = scene;
+
+    scnView.overlaySKScene = [GameScene gameSceneWithSize:scnView.bounds.size];
     
     // allows the user to manipulate the camera
     scnView.allowsCameraControl = YES;
