@@ -1,0 +1,89 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AndaleMono;}
+{\colortbl;\red255\green255\blue255;\red100\green56\blue32;\red0\green116\blue0;\red0\green0\blue0;
+}
+{\*\expandedcolortbl;;\csgenericrgb\c39100\c22000\c12500;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c0\c0\c0;
+}
+\paperw12240\paperh15840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 BACKGROUND:
+\b0 \
+\
+This project was originally developed as part of a technical request to Apple Developer Support, to demonstrate a problem I had with some spritekit animations.\
+\
+The project contains the complete solution as suggested by the Apple engineer (thanks!) with some code-tidyup on my part to try and formalise the solution.\
+\
+Essentially, I had attributed text labels being updated on the fly and because of the way they work, doing this outside the rendered thread could cause crashes.\
+\
+The Apple engineer showed me that I needed to defer the actual updates to the renderer thread in it's update callback.\
+\
+This then highlighted the need to be able to manage this, and in a very long conversation with Apple, I decided to do so with a manager class which is used as a container for any nodes needing attention during the update callback.\
+\
+I then found problems with my implementation whereby nodes needed to "know" when they are no longer in the node tree so that they could automatically remove themselves from the new manager (and thus, not cause a crash in the update thread).\
+\
+The Apple engineer suggested that I use the SKNode.removeFromParent message to let a node know when it is no longer part of the node tree however this does not always work, as the internal implementation does not consistently release objects when this is done.\
+\
+I ended up enhancing this project to demonstrate the problems with removeFromParent (and the other removeFromParent like methods), and this repo is the result.\
+\
+I will be submitting this project to Apple as a bug report in an attempt to get a consistent, and leak-free implementation of removeFromParent.\
+\
+
+\b INSTRUCTIONS:
+\b0 \
+\
+This project is a stock standard SceneKit app as created by Xcode 8, with the alterations as outlined above.\
+\
+Within the GameScene class, there are a number of #define's that can be used to demonstrate the behaviours I've mentioned:\
+\
+\pard\tx480\pardeftab480\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \CocoaLigature0 #define TEST_REMOVAL\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+If uncommented, then the project will update the label 100 times before removing it from the node tree, at which time, a dealloc call should occur (traced).\
+\
+In addition to this:\
+\
+\pard\tx480\pardeftab480\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \CocoaLigature0 #define TEST_VIA_REMOVE_FROM_PARENT\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+Will cause the removal to be done via a call to removeFromParent.  This will not cause a call to dealloc, resulting in a leak.\
+\
+\pard\tx480\pardeftab480\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \CocoaLigature0 #define TEST_VIA_REMOVE_ALL_CHILDREN\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+Will cause the removal to be done via a call to removeAllChildren.  This does call dealloc.\
+\
+\pard\tx480\pardeftab480\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf2 \CocoaLigature0 #define TEST_VIA_REMOVE_CHILDREN\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+Will cause the removal to be done via a call to removeChildrenInArray.  This does call dealloc.\
+\
+ \
+
+\b ContainerNode
+\b0 \
+\
+Finally, as a workaround for the leak in removeFromParent, I created a node called ContainerNode that is a direct subclass of SKNode.  It overrides each of the removal messages so that all work in a consistent manner.\
+\
+This can be demonstrated by uncommenting:\
+\
+\pard\tx480\pardeftab480\pardirnatural\partightenfactor0
+
+\f1\fs20 \cf3 \CocoaLigature0 //#define USE_CONTAINER_NODE 1\cf4 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+With this done, all of the above tests will result in a dealloc, showing that the leak has been corrected.\
+}

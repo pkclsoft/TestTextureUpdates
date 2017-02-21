@@ -43,6 +43,7 @@
 		D042818A1E265F06003C57A9 /* NSAttributedString+DDHTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+DDHTML.m"; sourceTree = "<group>"; };
 		D042818D1E265F87003C57A9 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		D04281921E286BDA003C57A9 /* SKUpdateableNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKUpdateableNode.h; sourceTree = "<group>"; };
+		D0FB386C1E5C652600821DC8 /* README.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = README.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +97,7 @@
 				D042816E1E2653D2003C57A9 /* LaunchScreen.storyboard */,
 				D04281711E2653D2003C57A9 /* Info.plist */,
 				D042815E1E2653D2003C57A9 /* Supporting Files */,
+				D0FB386C1E5C652600821DC8 /* README.rtf */,
 			);
 			path = TestTextureUpdates;
 			sourceTree = "<group>";
