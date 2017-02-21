@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0421B3F1E3589F9007D7090 /* SKContainerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D0421B3E1E3589F9007D7090 /* SKContainerNode.m */; };
 		D04281601E2653D2003C57A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D042815F1E2653D2003C57A9 /* main.m */; };
 		D04281631E2653D2003C57A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D04281621E2653D2003C57A9 /* AppDelegate.m */; };
 		D04281651E2653D2003C57A9 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D04281641E2653D2003C57A9 /* art.scnassets */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D0421B3D1E3589F9007D7090 /* SKContainerNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKContainerNode.h; sourceTree = "<group>"; };
+		D0421B3E1E3589F9007D7090 /* SKContainerNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKContainerNode.m; sourceTree = "<group>"; };
 		D042815B1E2653D2003C57A9 /* TestTextureUpdates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTextureUpdates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D042815F1E2653D2003C57A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D04281611E2653D2003C57A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -39,6 +42,7 @@
 		D04281891E265F06003C57A9 /* NSAttributedString+DDHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+DDHTML.h"; sourceTree = "<group>"; };
 		D042818A1E265F06003C57A9 /* NSAttributedString+DDHTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+DDHTML.m"; sourceTree = "<group>"; };
 		D042818D1E265F87003C57A9 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		D04281921E286BDA003C57A9 /* SKUpdateableNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKUpdateableNode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,9 @@
 				D04281671E2653D2003C57A9 /* GameViewController.m */,
 				D042817D1E265604003C57A9 /* GameScene.h */,
 				D042817E1E265604003C57A9 /* GameScene.m */,
+				D04281921E286BDA003C57A9 /* SKUpdateableNode.h */,
+				D0421B3D1E3589F9007D7090 /* SKContainerNode.h */,
+				D0421B3E1E3589F9007D7090 /* SKContainerNode.m */,
 				D04281831E265CCF003C57A9 /* SKAttributedLabelNode.h */,
 				D04281841E265CCF003C57A9 /* SKAttributedLabelNode.m */,
 				D04281891E265F06003C57A9 /* NSAttributedString+DDHTML.h */,
@@ -187,6 +194,7 @@
 				D04281631E2653D2003C57A9 /* AppDelegate.m in Sources */,
 				D042817F1E265604003C57A9 /* GameScene.m in Sources */,
 				D04281681E2653D2003C57A9 /* GameViewController.m in Sources */,
+				D0421B3F1E3589F9007D7090 /* SKContainerNode.m in Sources */,
 				D04281601E2653D2003C57A9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +358,7 @@
 				D04281761E2653D2003C57A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

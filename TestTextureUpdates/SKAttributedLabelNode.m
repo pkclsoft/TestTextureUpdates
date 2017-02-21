@@ -1,6 +1,12 @@
 
 #import "SKAttributedLabelNode.h"
 
+@interface SKAttributedLabelNode()
+
+@property (nonatomic, strong) SKTexture* updatedLabelTexture;
+
+@end
+
 @implementation SKAttributedLabelNode
 - (id) initWithSize:(CGSize)size {
     self = [super initWithColor:[UIColor clearColor] size:size];
@@ -13,6 +19,17 @@
 
 - (void) dealloc {
     NSLog(@"SKAttributedLabelNode.dealloc");
+
+}
+
+- (void) removeFromParent {
+    NSLog(@"SKAttributedLabelNode.removeFromParent");
+    
+    [self.children enumerateObjectsUsingBlock:^(SKNode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromParent];
+    }];
+
+    [super removeFromParent];
 }
 
 - (void) setAttributedText:(NSAttributedString *)attributedText {
@@ -20,11 +37,6 @@
     
     [self draw];
 }
-
-/**
- * Uncomment this to get the text on display.
- */
-//#define DISPLAY_TEXT
 
 - (void) draw {
     NSAttributedString *attrStr = self.attributedText;
@@ -38,7 +50,6 @@
     /**
      * This code will render the attributed string into a texture
      */
-#ifdef DISPLAY_TEXT
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);
     float strHeight = [attrStr boundingRectWithSize:self.size options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height;
     float yOffset = (self.size.height - strHeight) / 2.0;
@@ -49,23 +60,27 @@
     UIGraphicsEndImageContext();
 
     // update Sprite Node with textImage
-    SKTexture *labelTexture = [SKTexture textureWithImage:textImage];
-#else
-
-    /**
-     * In order to demonstrate the problem, I've replaced the above code with a simple texture load
-     * from a file.
-     */
-
-    SKTexture *labelTexture = [SKTexture textureWithImageNamed:@"art.scnassets/particle.png"];
-#endif
+    self.updatedLabelTexture = [SKTexture textureWithImage:textImage];
 
     /**
      * I believe that this line is causing the crash because assigning the new texture is being done concurrently with
      * the renderer.  How can I fix this?
      */
-    self.texture = labelTexture;
+    self.requiresUpdate = YES;
+}
 
+#pragma mark - SKUpdateableNode Protocol Implementation
+
+/*!
+ * Required because updating/replacing the texture needs to be done within the scene's update callback.
+ */
+- (void) updateNode {
+    self.texture = self.updatedLabelTexture;
+    self.updatedLabelTexture = nil;
+
+    // Now reset the flag.
+    //
+    self.requiresUpdate = NO;
 }
 
 @end
