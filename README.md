@@ -24,21 +24,21 @@ This project is a stock standard SceneKit app as created by Xcode 8, with the al
 
 Within the GameScene class, there are a number of #define's that can be used to demonstrate the behaviours I've mentioned:
 
-#define TEST_REMOVAL
+    #define TEST_REMOVAL
 
 If uncommented, then the project will update the label 100 times before removing it from the node tree, at which time, a dealloc call should occur (traced).
 
 In addition to this:
 
-#define TEST_VIA_REMOVE_FROM_PARENT
+    #define TEST_VIA_REMOVE_FROM_PARENT
 
 Will cause the removal to be done via a call to removeFromParent.  This will not cause a call to dealloc, resulting in a leak.
 
-#define TEST_VIA_REMOVE_ALL_CHILDREN
+    #define TEST_VIA_REMOVE_ALL_CHILDREN
 
 Will cause the removal to be done via a call to removeAllChildren.  This does call dealloc.
 
-#define TEST_VIA_REMOVE_CHILDREN
+    #define TEST_VIA_REMOVE_CHILDREN
 
 Will cause the removal to be done via a call to removeChildrenInArray.  This does call dealloc.
 
@@ -50,6 +50,6 @@ Finally, as a workaround for the leak in removeFromParent, I created a node call
 
 This can be demonstrated by uncommenting:
 
-//#define USE_CONTAINER_NODE 1
+    //#define USE_CONTAINER_NODE 1
 
 With this done, all of the above tests will result in a dealloc, showing that the leak has been corrected.
