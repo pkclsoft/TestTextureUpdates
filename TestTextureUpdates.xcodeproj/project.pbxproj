@@ -44,6 +44,7 @@
 		D042818D1E265F87003C57A9 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		D04281921E286BDA003C57A9 /* SKUpdateableNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKUpdateableNode.h; sourceTree = "<group>"; };
 		D0FB386C1E5C652600821DC8 /* README.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = README.rtf; path = TestTextureUpdates/README.rtf; sourceTree = "<group>"; };
+		D0FB386D1E5C6CC600821DC8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				D0FB386C1E5C652600821DC8 /* README.rtf */,
+				D0FB386D1E5C6CC600821DC8 /* README.md */,
 				D042815D1E2653D2003C57A9 /* TestTextureUpdates */,
 				D042815C1E2653D2003C57A9 /* Products */,
 				D042818C1E265F87003C57A9 /* Frameworks */,
